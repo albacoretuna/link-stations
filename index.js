@@ -1,6 +1,9 @@
+
 /*
+ *
  * Find the best link station for each device,
  * according to its coordination and device's reach.
+ * read TODO to see how to improve it
  */
 
 
@@ -101,3 +104,4 @@ devices.forEach((device) => getMostSuitableStation(device, stations));
 // console.log('power for 10, 1 is ', getPower(10, 1));
 // console.log('power is ', getPower(10, 1));
 // TODO break it into modules
+// TODO check all the inputs, for now it's fine but if it becomes a public function all the input needs to be checked properly
