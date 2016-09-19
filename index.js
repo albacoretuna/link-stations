@@ -31,24 +31,26 @@ const getDistance = (pointA, pointB) => {
 
 // for each device, returns an array of pwoers for all stations
 const getPowersForDevice = (device, stations) => {
-    return stations.map((station) => {
+    const powersList = stations.map((station) => {
         return getPower(station[2],
             getDistance({x: device[0], y: device[1]}, {x: station[0], y: station[1]}))
     });
+
+    return {
+        powersList
+    };
 };
 
-const getMostSuitableStation = (report) => {
-    const highestPower = Math.max(...report);
-    console.log('highest Power', highestPower);
-    console.log('report: \n ', report);
-    console.log('rport.indexOf(highestPower): ', report.indexOf(highestPower));
-    const bestStation = stations[report.indexOf(highestPower)];
-    console.log('bestStation: \n ', bestStation);
-    console.log('bestStation for : \n ', bestStation);
+const getMostSuitableStation = (device, stations) => {
+    const powersList = getPowersForDevice(device, stations).powersList;
+    const highestPower = Math.max(...powersList);
+    const bestStation = stations[powersList.indexOf(highestPower)];
+    console.log(`Best link station for point ${device[0]}, ${device[1]} is:
+                ${bestStation[0]}, ${bestStation[0]} with power ${highestPower}`);
 };
 
 
-console.log('first device: ', getPowersForDevice(devices[0], stations));
-console.log('second device: ', getPowersForDevice(devices[1], stations));
-console.log('third  device: ', getPowersForDevice(devices[2], stations));
-console.log('bestStations device 0: ', getMostSuitableStation(getPowersForDevice(devices[2], stations)));
+// console.log('first device: ', getPowersForDevice(devices[0], stations));
+// console.log('second device: ', getPowersForDevice(devices[1], stations));
+// console.log('third  device: ', getPowersForDevice(devices[2], stations));
+console.log('bestStations device 0: ', getMostSuitableStation(devices[0], stations));
