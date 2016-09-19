@@ -22,22 +22,33 @@ const getDistance = (pointA, pointB) => {
 };
 
 
-console.log('power for 10, 1 is ', getPower(10, 1));
-console.log('power is ', getPower(10, 1));
-
-// TODO turns this into tests
+// TODO turns this into unit tests
 // let distance = getDistance({x: devices[0][0], y: devices[0][1]}, {x: stations[1][0], y: stations[1][1]});
 // let distance = getDistance({x: 10, y: 12}, {x: 1, y: 4});
 // console.log('power device 1: ', getPower(1000, distance));
+// console.log('power for 10, 1 is ', getPower(10, 1));
+// console.log('power is ', getPower(10, 1));
 
 // for each device, returns an array of pwoers for all stations
-const getPowerForDevice = (device, stations) => {
+const getPowersForDevice = (device, stations) => {
     return stations.map((station) => {
         return getPower(station[2],
-            getDistance({x: device[0], y: device[1]}, {x: station[0], y: station[1]}));
+            getDistance({x: device[0], y: device[1]}, {x: station[0], y: station[1]}))
     });
 };
 
-console.log('first device: ', getPowerForDevice(devices[0], stations).sort((a, b) => b-a));
-console.log('second device: ', getPowerForDevice(devices[1], stations).sort((a, b) => b-a));
-console.log('third  device: ', getPowerForDevice(devices[2], stations).sort((a, b) => b-a));
+const getMostSuitableStation = (report) => {
+    const highestPower = Math.max(...report);
+    console.log('highest Power', highestPower);
+    console.log('report: \n ', report);
+    console.log('rport.indexOf(highestPower): ', report.indexOf(highestPower));
+    const bestStation = stations[report.indexOf(highestPower)];
+    console.log('bestStation: \n ', bestStation);
+    console.log('bestStation for : \n ', bestStation);
+};
+
+
+console.log('first device: ', getPowersForDevice(devices[0], stations));
+console.log('second device: ', getPowersForDevice(devices[1], stations));
+console.log('third  device: ', getPowersForDevice(devices[2], stations));
+console.log('bestStations device 0: ', getMostSuitableStation(getPowersForDevice(devices[2], stations)));

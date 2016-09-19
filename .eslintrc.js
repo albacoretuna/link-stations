@@ -22,6 +22,8 @@ module.exports = {
             "error",
             "always"
         ],
-        "no-console" : "allow"
+        "no-console" : [
+            "allow"
+        ]
     }
 };
