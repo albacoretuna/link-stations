@@ -1,11 +1,9 @@
 
 /*
- *
  * Find the best link station for each device,
  * according to its coordination and device's reach.
  * read TODO to see how to improve it
  */
-
 
 // stations coordinates and range [x, y, range]
 const stations = [[0, 0, 10], [20, 20, 5], [10, 0, 12]];
@@ -16,7 +14,6 @@ const devices = [[0, 0], [100, 100], [15, 10], [18, 18]];
 // partial application 'cause... syntax sugar is sweet
 const square = (x) => Math.pow(x, 2);
 
-// calculates power according to the reach
 /**
  * getPower
  *
@@ -47,8 +44,7 @@ const getDistance = (pointA, pointB) => {
     pointA.y = parseFloat(pointA.y, 10);
     pointB.x = parseFloat(pointB.x, 10);
     pointB.y = parseFloat(pointB.y, 10);
-    const distance = Math.sqrt(square(pointA.x - pointB.x) + square(pointA.y - pointB.y));
-    return distance;
+    return Math.sqrt(square(pointA.x - pointB.x) + square(pointA.y - pointB.y));
 };
 
 /**
@@ -81,11 +77,11 @@ const getMostSuitableStation = (device, stations) => {
     const highestPower = Math.max(...powersList);
     const bestStation = stations[powersList.indexOf(highestPower)];
     if (highestPower > 0 ) {
-    console.log(
-        `###### Link found! \\O/ ######\n`,
-        `Best link station for point ${device[0]}, ${device[1]} is:`,
-        `${bestStation[0]}, ${bestStation[0]} with power ${highestPower}\n\n`
-    );
+        console.log(
+            `###### Link found! \\O/ ######\n`,
+            `Best link station for point ${device[0]}, ${device[1]} is:`,
+            `${bestStation[0]}, ${bestStation[0]} with power ${highestPower}\n\n`
+        );
     } else {
         console.log(
             `### Oh no, sorry ###\n`,
