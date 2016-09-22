@@ -37,7 +37,7 @@ const getPower = (reach, distance) => {
  * Calculate distance between to coordination points
  * @param pointA {object} e.g. {4, 2}
  * @param pointB {object} e.g. {4, 2}
- * @returns {undefined}
+ * @returns {number}
  */
 const getDistance = (pointA, pointB) => {
     pointA.x = parseFloat(pointA.x, 10);
